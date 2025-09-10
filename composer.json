@@ -1,0 +1,6 @@
+{
+    "name": "taylor/assessment",
+    "require": {
+        "smalot/pdfparser": "^2.12"
+    }
+}

@@ -1,0 +1,45 @@
+<mat-card
+  class="upload-area"
+  cdkDropList
+  (cdkDropListDropped)="onDrop($event)"
+  (dragover)="onDragOver($event)"
+  (dragenter)="onDragEnter($event)"
+  (drop)="onDropNative($event)"
+>
+  <mat-card-content>
+    <p>Drag & drop your document here or</p>
+    <button mat-raised-button color="primary" (click)="fileInput.click()">
+      Select a file
+    </button>
+    <input
+      #fileInput
+      type="file"
+      (change)="onFileSelected($event)"
+      hidden
+    />
+    <mat-form-field appearance="outline" style="margin-top: 16px; width: 100%;">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        rows="3"
+        placeholder="Enter a description"
+        [(ngModel)]="description"
+      ></textarea>
+    </mat-form-field>
+
+    <div style="margin-top: 16px;">
+      <button
+        mat-raised-button
+        color="accent"
+        [disabled]="!selectedFile"
+        (click)="uploadFile()"
+      >
+        Submit
+      </button>
+    </div>
+
+    <p *ngIf="selectedFile" style="margin-top: 8px;">
+      Selected file: {{ selectedFile.name }}
+    </p>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-title>Search Documents</mat-card-title>
+  <mat-card-content>
+
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Search</mat-label>
+      <input matInput type="text" [(ngModel)]="query" (input)="onSearchChange()" placeholder="Enter keywords..." />
+    </mat-form-field>
+
+    <div *ngIf="tokens.length > 0" style="margin: 8px 0;">
+      <strong>Keywords:</strong>
+      <span *ngFor="let token of tokens" class="keyword">{{ token }}</span>
+    </div>
+
+    <p *ngIf="results.length > 0">
+      {{ results.length }} result{{ results.length === 1 ? '' : 's' }} in 
+      {{ timeTaken | number:'1.0-2' }} ms
+    </p>
+
+    <mat-list *ngIf="results.length > 0">
+      <mat-list-item *ngFor="let doc of results">
+        <a [routerLink]="['/documents', doc.id]" [innerHTML]="doc.title"></a>
+        <p *ngIf="doc.description" [innerHTML]="doc.description"></p>
+      </mat-list-item>
+    </mat-list>
+
+    <p *ngIf="!results.length && query">
+      No results found.
+    </p>
+
+  </mat-card-content>
+</mat-card>

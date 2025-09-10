@@ -1,0 +1,29 @@
+<mat-card>
+  <mat-card-title>Documents</mat-card-title>
+
+  <div *ngIf="loading" class="loading-container">
+    <mat-progress-spinner diameter="30" mode="indeterminate"></mat-progress-spinner>
+  </div>
+
+  <mat-list *ngIf="!loading">
+    <mat-list-item *ngFor="let doc of documents">
+      <div matLine style="display: inline-block;">
+        <a [routerLink]="['/documents', doc.id]">{{ doc.title }}</a>
+      </div>
+      <button mat-icon-button color="warn" (click)="deleteDocument(doc.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-list-item>
+
+    <mat-list-item *ngIf="documents.length === 0">
+      <p>No documents found.</p>
+    </mat-list-item>
+  </mat-list>
+
+  <mat-paginator
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 20]"
+    (page)="onPageChange($event)">
+  </mat-paginator>
+</mat-card>

@@ -1,0 +1,15 @@
+<mat-card *ngIf="document">
+  <mat-card-header>
+    <mat-card-title>Document Details</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p><strong>Title:</strong> {{ document.title }}</p>
+    <p><strong>Description:</strong> {{ document.description }}</p>
+    <div style="margin-top: 16px;">
+      <a mat-raised-button color="primary" [href]="document.path" download>
+        Download Document
+      </a>
+    </div>
+  </mat-card-content>
+</mat-card>

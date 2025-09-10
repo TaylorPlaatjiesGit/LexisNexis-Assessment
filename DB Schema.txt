@@ -1,0 +1,24 @@
+CREATE TABLE documents (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255),
+    description TEXT,
+    path VARCHAR(500) NOT NULL,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX idx_title ON documents(title);
+CREATE INDEX idx_description ON documents(description);
+CREATE INDEX idx_extension ON documents(extension);
+
+CREATE TABLE search_index (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    document_id INT NOT NULL,
+    keyword VARCHAR(255) NOT NULL,
+    frequency INT DEFAULT 1,
+    position INT DEFAULT 1,
+    FOREIGN KEY (document_id) REFERENCES documents(id) ON DELETE CASCADE
+);
+
+CREATE INDEX idx_keyword ON search_index(keyword);
+CREATE INDEX idx_document_id ON search_index(document_id);
+CREATE INDEX idx_keyword_doc ON search_index(keyword, document_id);
